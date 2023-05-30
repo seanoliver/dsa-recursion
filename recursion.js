@@ -94,32 +94,20 @@ function findIndex(arr, val, i=0) {
 
 /** gatherStrings: given an object, return an array of all of the string values. */
 
-// function gatherStrings(obj, arr=[]) {
-//   console.log('obj', obj, 'arr', arr);
-//   if (Object.values(obj).length === 0) return arr;
-
-//   for (const val of Object.values(obj)) {
-//     if (typeof val === 'string') {
-//       arr.push(val);
-//     } else {
-//       return gatherStrings(val, arr);
-//     }
-//   }
-
-// }
-
 function gatherStrings(obj, arr=[]) {
-  // Check if obj is actually an object
-  if (typeof obj !== 'object' || obj === null) return arr;
+  console.log('obj', obj, 'arr', arr);
+  if (Object.values(obj).length === 0) return arr;
 
-  for (const key in obj) {
-    if (typeof obj[key] === 'string') {
-      arr.push(obj[key]);
-    } else if (typeof obj[key] === 'object') {
-      gatherStrings(obj[key], arr);
+  for (const val of Object.values(obj)) {
+    if (typeof val === 'string') {
+      arr.push(val);
+    } else {
+      gatherStrings(val, arr);
     }
   }
-  return arr;
+
+	return arr;
+
 }
 
 // FURTHER STUDY
@@ -127,7 +115,34 @@ function gatherStrings(obj, arr=[]) {
 /** binarySearch: given a sorted array of numbers, and a value,
  * return true if val is in array, false if not present). */
 
-function binarySearch(arr, val) {}
+function binarySearch(arr, val) { //arr= [3,4]
+	//if arr is empty return false
+	if (arr.length === 0) return false;
+	//if val is less than arr[0] and greater than arr[arr.length -1] return false
+	if (val < arr[0] || val > arr[arr.length -1]) return false;
+
+	//get the midpoint
+	let midpointIdx = Math.floor(arr.length / 2); //1
+	console.log("midpoint", midpointIdx, "arr[midpoint]", arr[midpointIdx])
+
+	//base case: if midpoint is val return true
+	if (arr[midpointIdx] === val) return true;
+		//if val greater than midpoint and less than max
+	if (val > arr[midpointIdx] && val < arr[arr.length - 1]) {
+		//remove everything greater than midpoint
+		arr = arr.slice(midpointIdx, arr.length)
+		//if less than midpoint and greater than min
+	} else {
+		//remove everything less than midpoint
+		arr = arr.slice(0, midpointIdx)
+	}
+
+	console.log("AFTER:arr[midpoint]:", arr[midpointIdx], "arr", arr)
+	return binarySearch(arr, val)
+
+}
+
+[1, 2, 3, 4 ], 4
 
 /** binarySearch: given a sorted array of numbers, and a value,
  * return the index of that value (or -1 if val is not present). */
