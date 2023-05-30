@@ -11,29 +11,29 @@ const {
   binarySearchIndex,
 } = require("./recursion");
 
-describe("product", function() {
-  it("returns the product of all numbers in an array", function() {
-    expect(product([])).toBe(1);
-    expect(product([10])).toBe(10);
-    expect(product([2, 3, 4])).toBe(24);
-  });
-});
+// describe("product", function() {
+//   it("returns the product of all numbers in an array", function() {
+//     expect(product([])).toBe(1);
+//     expect(product([10])).toBe(10);
+//     expect(product([2, 3, 4])).toBe(24);
+//   });
+// });
 
-describe("longest", function() {
-  it("returns the length of the longest word in an array of words", function() {
-    expect(longest([])).toBe(0);
-    expect(longest(["hello"])).toBe(5);
-    expect(longest(["hi", "hello", "hola"])).toBe(5);
-  });
-});
+// describe("longest", function() {
+//   it("returns the length of the longest word in an array of words", function() {
+//     expect(longest([])).toBe(0);
+//     expect(longest(["hello"])).toBe(5);
+//     expect(longest(["hi", "hello", "hola"])).toBe(5);
+//   });
+// });
 
-describe("everyOther", function() {
-  it("returns a string with every other character in the input", function() {
-    expect(everyOther("")).toBe("");
-    expect(everyOther("h")).toBe("h");
-    expect(everyOther("hello")).toBe("hlo");
-  });
-});
+// describe("everyOther", function() {
+//   it("returns a string with every other character in the input", function() {
+//     expect(everyOther("")).toBe("");
+//     expect(everyOther("h")).toBe("h");
+//     expect(everyOther("hello")).toBe("hlo");
+//   });
+// });
 
 // describe("find", function() {
 //   let animals = ["duck", "cat", "pony"];

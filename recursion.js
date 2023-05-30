@@ -36,11 +36,41 @@ function everyOther(str, i=0, keptLetters='') {
 
 /** find: return boolean depending on if val exists in array or not. */
 
-function find(arr, val) {}
+function find(arr, val) {
+	//if arr is empty return false
+	if (arr.length === 0) return false;
+	//base case: if arr[0] === val return true
+	if (arr[0] === val) return true;
+	//if arr[0] !== val
+	if (arr[0] !== val) {
+		//splice off arr[0]
+		arr.splice(0, 1);
+	}
+	//return recursive call
+	return find(arr, val)
+}
 
 /** isPalindrome: checks whether a string is a palindrome or not. */
 
-function isPalindrome(str) {}
+function isPalindrome(str) {
+	//base case: if str.length is 0 or 1 return true
+	if (str.length === 0 || str.length === 1 ) return true;
+	//base case: if str[0] !== str[str.length -1] return false
+	if (str[0] !== str[str.length -1]) return false;
+
+	//create a new string variable
+	let shorterStr = str;
+	//if beg and end letters match
+	if (str[0] === str[str.length - 1]) {
+		//slice off first char and reassign
+		shorterStr = shorterStr.slice(1);
+		//slice off end char and reassign
+		shorterStr = shorterStr.slice(- 1);
+	}
+
+	//call recursive case and pass in new string
+	return isPalindrome(shorterStr);
+}
 
 /** revString: return a copy of a string, but in reverse. */
 
