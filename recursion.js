@@ -74,15 +74,53 @@ function isPalindrome(str) {
 
 /** revString: return a copy of a string, but in reverse. */
 
-function revString(str) {}
+function revString(str, reversedStr='', i=str.length-1) {
+  if (reversedStr.length === str.length) return reversedStr;
+
+  reversedStr += str[i];
+  i--;
+  return revString(str, reversedStr, i);
+}
 
 /** findIndex: return the index of val in arr (or -1 if val is not present). */
 
-function findIndex(arr, val) {}
+function findIndex(arr, val, i=0) {
+  if (arr[i] === val) return i;
+  if (i >= arr.length) return -1;
+
+  i++;
+  return findIndex(arr, val, i);
+}
 
 /** gatherStrings: given an object, return an array of all of the string values. */
 
-function gatherStrings(obj) {}
+// function gatherStrings(obj, arr=[]) {
+//   console.log('obj', obj, 'arr', arr);
+//   if (Object.values(obj).length === 0) return arr;
+
+//   for (const val of Object.values(obj)) {
+//     if (typeof val === 'string') {
+//       arr.push(val);
+//     } else {
+//       return gatherStrings(val, arr);
+//     }
+//   }
+
+// }
+
+function gatherStrings(obj, arr=[]) {
+  // Check if obj is actually an object
+  if (typeof obj !== 'object' || obj === null) return arr;
+
+  for (const key in obj) {
+    if (typeof obj[key] === 'string') {
+      arr.push(obj[key]);
+    } else if (typeof obj[key] === 'object') {
+      gatherStrings(obj[key], arr);
+    }
+  }
+  return arr;
+}
 
 // FURTHER STUDY
 
