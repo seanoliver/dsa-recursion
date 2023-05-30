@@ -123,12 +123,12 @@ function binarySearch(arr, val) { //arr= [3,4]
 
 	//get the midpoint
 	let midpointIdx = Math.floor(arr.length / 2); //1
-	console.log("midpoint", midpointIdx, "arr[midpoint]", arr[midpointIdx])
+	// console.log("midpoint", midpointIdx, "arr[midpoint]", arr[midpointIdx])
 
 	//base case: if midpoint is val return true
 	if (arr[midpointIdx] === val) return true;
 		//if val greater than midpoint and less than max
-	if (val > arr[midpointIdx] && val < arr[arr.length - 1]) {
+	if (val > arr[midpointIdx]) {
 		//remove everything greater than midpoint
 		arr = arr.slice(midpointIdx, arr.length)
 		//if less than midpoint and greater than min
@@ -136,18 +136,42 @@ function binarySearch(arr, val) { //arr= [3,4]
 		//remove everything less than midpoint
 		arr = arr.slice(0, midpointIdx)
 	}
-
-	console.log("AFTER:arr[midpoint]:", arr[midpointIdx], "arr", arr)
+	// console.log("AFTER:arr[midpoint]:", arr[midpointIdx], "arr", arr)
 	return binarySearch(arr, val)
 
 }
 
-[1, 2, 3, 4 ], 4
+// [1, 2, 3, 4 ], 4
 
 /** binarySearch: given a sorted array of numbers, and a value,
  * return the index of that value (or -1 if val is not present). */
 
-function binarySearchIndex(arr, val) {}
+function binarySearchIndex(arr, val) {
+	let min = 0;
+	let max = arr.length - 1;
+
+	function _binarySearchIndex(arr, val, min, max, depth=0) {
+
+		let mid = Math.floor(((max - min) / 2) + min);
+		console.log('BEFORE:', ' -> '.repeat(depth), 'min', min, 'max', max, 'mid', mid, 'val', val, 'arr', arr);
+
+		if (val < arr[min] || val > arr[max]) return -1;
+		if (val === arr[mid]) return mid;
+
+		if (val > arr[mid]) {
+			min = mid;
+		} else {
+			max = mid;
+		}
+		console.log('AFTER:', ' -> '.repeat(depth), 'min', min, 'max', max, 'mid', mid, 'val', val, 'arr', arr);
+		depth++;
+		_binarySearchIndex(arr, val, min, max, depth);
+
+	}
+
+	_binarySearchIndex(arr, val, min, max);
+
+}
 
 // you might find the above two problems easier if you change the function signature to:
 //
