@@ -118,8 +118,6 @@ function gatherStrings(obj, arr=[]) {
 function binarySearch(arr, val) { //arr= [3,4]
 	//if arr is empty return false
 	if (arr.length === 0) return false;
-	//if val is less than arr[0] and greater than arr[arr.length -1] return false
-	if (val < arr[0] || val > arr[arr.length -1]) return false;
 
 	//get the midpoint
 	let midpointIdx = Math.floor(arr.length / 2); //1
@@ -130,7 +128,7 @@ function binarySearch(arr, val) { //arr= [3,4]
 		//if val greater than midpoint and less than max
 	if (val > arr[midpointIdx]) {
 		//remove everything greater than midpoint
-		arr = arr.slice(midpointIdx, arr.length)
+		arr = arr.slice(midpointIdx + 1)
 		//if less than midpoint and greater than min
 	} else {
 		//remove everything less than midpoint
@@ -151,25 +149,27 @@ function binarySearchIndex(arr, val) {
 	let max = arr.length - 1;
 
 	function _binarySearchIndex(arr, val, min, max, depth=0) {
+		// if (min > max) return -1;
 
-		let mid = Math.floor(((max - min) / 2) + min);
+		let mid = Math.round(((max - min) / 2) + min);
+		//mid = 4
 		console.log('BEFORE:', ' -> '.repeat(depth), 'min', min, 'max', max, 'mid', mid, 'val', val, 'arr', arr);
 
 		if (val < arr[min] || val > arr[max]) return -1;
 		if (val === arr[mid]) return mid;
 
 		if (val > arr[mid]) {
-			min = mid;
+			min = mid + 1;
 		} else {
-			max = mid;
+			max = mid - 1;
 		}
 		console.log('AFTER:', ' -> '.repeat(depth), 'min', min, 'max', max, 'mid', mid, 'val', val, 'arr', arr);
 		depth++;
-		_binarySearchIndex(arr, val, min, max, depth);
+		return _binarySearchIndex(arr, val, min, max, depth);
 
 	}
 
-	_binarySearchIndex(arr, val, min, max);
+	return _binarySearchIndex(arr, val, min, max);
 
 }
 
